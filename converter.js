@@ -36,6 +36,14 @@ var csvFormat = [
     'former_apprentices',
 ];
 
+const id_fields = [
+    'parent1',
+    'parent2',
+    'ID',
+    'mate',
+    'mentor'
+]
+
 function readCsvSave(csvTxt) {
     
     var catData = [];
@@ -74,10 +82,12 @@ function addMissingData(catData) {
         delete cat.name;
         delete cat.NULL;
 
-        cat.ID = cat.ID.toString();
-        if (cat.mate) {
-            cat.mate = cat.mate.toString();
-        }
+        id_fields.forEach(id_field => {
+            if (cat[id_field] !== null) {
+                cat[id_field] = cat[id_field].toString();
+            }
+        });
+
         cat.gender_align = cat.gender;
         cat.paralyzed = false;
         cat.no_kits = false;
