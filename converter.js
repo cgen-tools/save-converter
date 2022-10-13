@@ -114,7 +114,7 @@ function onClick() {
     reader.onload = (e) => {
         var catData = readCsvSave(e.target.result);
         catData = addMissingData(catData);
-        save('clan_cats.json', JSON.stringify(catData));
+        save('clan_cats.json', JSON.stringify(catData, null, 4));
     }
     reader.readAsText(file);
 }
