@@ -44,6 +44,120 @@ const id_fields = [
     'mentor'
 ]
 
+const tortie_map = {
+    'ONE': {
+        'tortie_base': 'single',
+        'tortie_color': 'BLACK',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDONE'
+    },
+    'TWO': {
+        'tortie_base': 'single',
+        'tortie_color': 'BLACK',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDTWO'
+    },
+    'FADEDONE': {
+        'tortie_base': 'single',
+        'tortie_color': 'BROWN',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDONE'
+    },
+    'FADEDTWO': {
+        'tortie_base': 'single',
+        'tortie_color': 'BROWN',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDTWO'
+    },
+    'BLUEONE': {
+        'tortie_base': 'single',
+        'tortie_color': 'SILVER',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'PALEONE'
+    },
+    'BLUETWO': {
+        'tortie_base': 'single',
+        'tortie_color': 'SILVER',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'PALETWO'
+    }
+}
+
+const calico_map = {
+    'ONE': {
+        'tortie_base': 'single',
+        'tortie_color': 'BLACK',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDTHREE'
+    },
+    'TWO': {
+        'tortie_base': 'single',
+        'tortie_color': 'BLACK',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDFOUR'
+    },
+    'THREE': {
+        'tortie_base': 'single',
+        'tortie_color': 'BLACK',
+        'tortie_pattern': 'tortietabby',
+        'pattern': 'GOLDTHREE'
+    },
+    'FOUR': {
+        'tortie_base': 'single',
+        'tortie_color': 'BLACK',
+        'tortie_pattern': 'tortietabby',
+        'pattern': 'GOLDFOUR'
+    },
+    'FADEDONE': {
+        'tortie_base': 'single',
+        'tortie_color': 'BROWN',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDTHREE'
+    },
+    'FADEDTWO': {
+        'tortie_base': 'single',
+        'tortie_color': 'BROWN',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'GOLDFOUR'
+    },
+    'FADEDTHREE': {
+        'tortie_base': 'tabby',
+        'tortie_color': 'BROWN',
+        'tortie_pattern': 'tortietabby',
+        'pattern': 'GOLDTHREE'
+    },
+    'FADEDFOUR': {
+        'tortie_base': 'tabby',
+        'tortie_color': 'BROWN',
+        'tortie_pattern': 'tortietabby',
+        'pattern': 'GOLDFOUR'
+    },
+    'BLUEONE': {
+        'tortie_base': 'single',
+        'tortie_color': 'SILVER',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'PALETHREE'
+    },
+    'BLUETWO': {
+        'tortie_base': 'single',
+        'tortie_color': 'SILVER',
+        'tortie_pattern': 'tortiesolid',
+        'pattern': 'PALEFOUR'
+    },
+    'BLUETHREE': {
+        'tortie_base': 'tabby',
+        'tortie_color': 'SILVER',
+        'tortie_pattern': 'tortietabby',
+        'pattern': 'PALETHREE'
+    },
+    'BLUEFOUR': {
+        'tortie_base': 'tabby',
+        'tortie_color': 'SILVER',
+        'tortie_pattern': 'tortietabby',
+        'pattern': 'PALEFOUR'
+    }
+}
+
 function readCsvSave(csvTxt) {
     
     var catData = [];
@@ -92,9 +206,19 @@ function addMissingData(catData) {
         cat.paralyzed = false;
         cat.no_kits = false;
         cat.exiled = false;
-        cat.tortie_base = null;
-        cat.tortie_color = null;
-        cat.tortie_pattern = null;
+
+        if (cat.pelt_name == 'Tortie') {
+            var tortie_vars = tortie_map[cat.pattern];
+        } else if (cat.pelt_name == 'Calico') {
+            var tortie_vars = calico_map[cat.pattern];
+        } else {
+            var tortie_vars = {
+                'tortie_base': null,
+                'tortie_color': null,
+                'tortie_pattern': null,
+            }
+        }
+        cat = Object.assign(cat, tortie_vars);
 
         cat.spirit_young_adult = cat.spirit_adult;
         cat.spirit_senior_adult = cat.spirit_adult;
