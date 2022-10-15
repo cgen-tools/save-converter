@@ -36,6 +36,7 @@ var csvFormat = [
     'former_apprentices',
 ];
 
+const download_button = document.getElementById('download-button');
 function readCsvSave(csvTxt) {
     
     var catData = [];
@@ -119,4 +120,4 @@ function onClick() {
     reader.readAsText(file);
 }
 
-document.getElementById('download-button').addEventListener('click', onClick, false);
+download_button.addEventListener('click', onClick, false);
