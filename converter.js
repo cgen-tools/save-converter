@@ -158,6 +158,8 @@ const calico_map = {
     }
 }
 
+const file_input = document.getElementById('file-input');
+const download_button = document.getElementById('download-button');
 function readCsvSave(csvTxt) {
     
     var catData = [];
@@ -253,4 +255,14 @@ function onClick() {
     reader.readAsText(file);
 }
 
-document.getElementById('download-button').addEventListener('click', onClick, false);
+function onUpload() {
+    const file = file_input.files[0];
+    if (!file) {
+        download_button.setAttribute('disabled', true);
+        return;
+    }
+    download_button.removeAttribute('disabled');
+}
+
+file_input.addEventListener('change', onUpload, false);
+download_button.addEventListener('click', onClick, false);
