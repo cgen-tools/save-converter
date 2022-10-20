@@ -164,11 +164,14 @@ function readCsvSave(csvTxt) {
     
     var catData = [];
     var rows = csvTxt.split('\n');
+    var wrongColumnAmount = false;
 
     rows.forEach(row => {
         var columns = row.split(',');
         var cat = {}
-
+        if (columns.length != csvFormat.length) {
+            wrongColumnAmount = true;
+        }
         for (var i = 0; i < columns.length; i++) {
             var column = columns[i];
             column = column.trim();
@@ -188,6 +191,9 @@ function readCsvSave(csvTxt) {
         cat.former_apprentices = cat.former_apprentices == null ? []: cat.former_apprentices.toString().split(';');
         catData.push(cat);
     });
+    if (wrongColumnAmount == true) {
+        alert('WARNING: File does not seem to be in the Clangen Aug 10 save format. Conversion may not work.')
+    }
     return catData;
 }
 
@@ -248,9 +254,14 @@ function onClick() {
 
     var reader = new FileReader();
     reader.onload = (e) => {
-        var catData = readCsvSave(e.target.result);
-        catData = addMissingData(catData);
-        save('clan_cats.json', JSON.stringify(catData, null, 4));
+        try {
+            var catData = readCsvSave(e.target.result);
+            catData = addMissingData(catData);
+            save('clan_cats.json', JSON.stringify(catData, null, 4));
+        } catch(err) {
+            console.error(err.message)
+            alert('ERROR: Save conversion failed.');
+        }
     }
     reader.readAsText(file);
 }
@@ -261,6 +272,10 @@ function onUpload() {
         download_button.setAttribute('disabled', true);
         return;
     }
+    if (!file.name.endsWith('.csv')) {
+        alert('WARNING: Save file does not seem to be a .csv file.')
+    }
+
     download_button.removeAttribute('disabled');
 }
 
