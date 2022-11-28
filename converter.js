@@ -181,9 +181,9 @@ function readCsvSave(csvTxt) {
             column = column.trim();
             if (column == 'None') {
                 column = null;
-            } else if (column == 'True') {
+            } else if ('true'.localeCompare(column, undefined, { sensitivity: 'accent' }) === 0) {
                 column = true;
-            } else if (column == 'False') {
+            } else if ('false'.localeCompare(column, undefined, { sensitivity: 'accent' }) === 0) {
                 column = false;
             } else if (!isNaN(column)) {
                 column = Number(column);
