@@ -167,6 +167,10 @@ function readCsvSave(csvTxt) {
     var wrongColumnAmount = false;
 
     rows.forEach(row => {
+        // skip empty rows
+        if (row == null || row.trim() === ''){
+            return;
+        }
         var columns = row.split(',');
         var cat = {}
         if (columns.length != csvFormat.length) {
