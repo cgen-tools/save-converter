@@ -203,8 +203,10 @@ function readCsvSave(csvTxt) {
 
 function addMissingData(catData) {
     catData.forEach(cat => {
-        cat.name_prefix = cat.name.split(':')[0];
-        cat.name_suffix = cat.name.split(':')[1];
+        var split_name = cat.name.split(':');
+        cat.name_prefix = split_name[0];
+        cat.name_suffix = split_name[1] === '' ? null: split_name[1];
+
         delete cat.name;
         delete cat.NULL;
 
