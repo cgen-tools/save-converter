@@ -238,6 +238,18 @@ function addMissingData(catData) {
         cat.spirit_senior_adult = cat.spirit_adult;
         cat.accessory = null;
 
+        // corresponding to apr release
+        if (cat.trait === 'clever') {
+            cat.trait = 'wise';
+        }
+        if (cat.white_patches) {
+            cat.white_patches = cat.white_patches.replace('ANY2', 'ANYTWO');
+            cat.white_patches = cat.white_patches.replace('CREAMY', '');
+        }
+        if (cat.status === 'elder') {
+            cat.status = 'senior';
+        }
+        cat.eye_colour2 = cat.eye_colour;
     });
     return catData;
 }
