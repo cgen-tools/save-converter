@@ -246,8 +246,8 @@ function addMissingData(catData) {
             cat.white_patches = cat.white_patches.replace('ANY2', 'ANYTWO');
             cat.white_patches = cat.white_patches.replace('CREAMY', '');
         }
-        if (cat.status === 'elder') {
-            cat.status = 'senior';
+        if (cat.age === 'elder') {
+            cat.age = 'senior';
         }
         cat.eye_colour2 = cat.eye_colour;
     });
