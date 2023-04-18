@@ -249,7 +249,7 @@ function addMissingData(catData) {
         if (cat.age === 'elder') {
             cat.age = 'senior';
         }
-        cat.eye_colour2 = cat.eye_colour;
+        cat.eye_colour2 = null;
     });
     return catData;
 }
