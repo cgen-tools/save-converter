@@ -191,8 +191,8 @@ function readCsvSave(csvTxt) {
             cat[csvFormat[i]] = column;
         }
 
-        cat.current_apprentice = cat.current_apprentice === null ? []: cat.current_apprentice.toString().split(';');
-        cat.former_apprentices = cat.former_apprentices === null ? []: cat.former_apprentices.toString().split(';');
+        cat.current_apprentice = cat.current_apprentice === null || cat.current_apprentice === undefined ? []: cat.current_apprentice.toString().split(';');
+        cat.former_apprentices = cat.former_apprentices === null || cat.former_apprentices === undefined ? []: cat.former_apprentices.toString().split(';');
         catData.push(cat);
     });
     if (wrongColumnAmount == true) {
